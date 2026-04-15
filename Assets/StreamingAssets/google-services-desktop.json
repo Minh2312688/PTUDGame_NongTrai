@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "766781912533",
+    "firebase_url": "https://gamenongtrai2d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "gamenongtrai2d",
+    "storage_bucket": "gamenongtrai2d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:766781912533:android:3093a6c7383b11182ab95c",
+        "android_client_info": {
+          "package_name": "com.nongtrai.game2d"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTjNnv0oTegClpejnpZo-TpjFLWV2It7k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
