@@ -24,6 +24,9 @@ public class FirebaseLoginManager:MonoBehaviour
     public Button btnMoveToRegister;
     public GameObject registerForm;
     public GameObject loginForm;
+    //Upload data usser
+    private FireBaseDatabaseManager databaseManager;
+
 
     void Start()
     {
@@ -32,6 +35,7 @@ public class FirebaseLoginManager:MonoBehaviour
         btnLogin.onClick.AddListener(SigInWithFirebase);
         btnMoveToLogin.onClick.AddListener(SwitchForm);
         btnMoveToRegister.onClick.AddListener(SwitchForm);
+        databaseManager=GetComponent<FireBaseDatabaseManager>();
     }
     void RegisterAcountWithFirebase()
     {
@@ -42,7 +46,7 @@ public class FirebaseLoginManager:MonoBehaviour
             Debug.Log("Password phải >= 6 ký tự");
             return;
         }
-        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(static task =>
+        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread( task =>
         {
             if (task.IsCanceled)
             {
@@ -60,6 +64,12 @@ public class FirebaseLoginManager:MonoBehaviour
             FirebaseUser newUser = task.Result.User;
             Debug.LogFormat("Đăng ký thành công: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
+            Map mapInGame = new Map();
+            User userInGame = new User("", 100, 50, mapInGame);
+
+            databaseManager.WriteDatabase("User/" + newUser.UserId, userInGame.ToString());
+            //Chuyển màn chơi sau khi đăng nhập thành công
+            SceneManager.LoadScene("PlayScene");
         });
     }
     public void SigInWithFirebase()
@@ -70,7 +80,7 @@ public class FirebaseLoginManager:MonoBehaviour
         {
             Debug.Log("Password phải >= 6 ký tự");
         }
-        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(static task =>
+        _ = auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(static task =>
         {
             if (task.IsCanceled)
             {
@@ -85,6 +95,7 @@ public class FirebaseLoginManager:MonoBehaviour
             FirebaseUser user = task.Result.User;
             Debug.LogFormat("Đăng nhập thành công: {0} ({1})",
                 user.DisplayName, user.UserId);
+            
             //Chuyển màn chơi sau khi đăng nhập thành công
             SceneManager.LoadScene("PlayScene");
         });

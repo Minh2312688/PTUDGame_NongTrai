@@ -403,6 +403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1419267158}
   - component: {fileID: 1419267157}
+  - component: {fileID: 1419267159}
   m_Layer: 0
   m_Name: FirebaseAuthManager
   m_TagString: Untagged
@@ -447,6 +448,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1419267159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419267156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24ef103a219b4045af39b2a79d507e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireBaseDatabaseManager
 --- !u!114 &1559317097 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2967846403031576739, guid: 959cf3f46cfa71f41a64a75d02becd35, type: 3}

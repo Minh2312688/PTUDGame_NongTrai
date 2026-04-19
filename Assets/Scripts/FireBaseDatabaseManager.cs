@@ -17,9 +17,9 @@ public class FireBaseDatabaseManager : MonoBehaviour
     {
         
     }
-    public void WriteDatabase(string id,string message)
+    public void WriteDatabase(string path,string message)
     {
-        reference.Child("Users").Child(id).SetValueAsync(message)
+        reference.Child("Users").Child(path).SetValueAsync(message)
         .ContinueWithOnMainThread(task =>
         {
             if (task.IsCompleted)
@@ -30,9 +30,9 @@ public class FireBaseDatabaseManager : MonoBehaviour
             Debug.LogError("Ghi thất bại: " + task.Exception);
         });
     }
-    public void ReadDatabase(string id)
+    public void ReadDatabase(string path)
     {
-         reference.Child("Users").Child(id).GetValueAsync().ContinueWithOnMainThread(task =>
+         reference.Child("Users").Child(path).GetValueAsync().ContinueWithOnMainThread(task =>
     {
         if (task.IsCompleted)
         {

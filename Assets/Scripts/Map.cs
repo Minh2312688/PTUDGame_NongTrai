@@ -19,7 +19,7 @@ public class Map
    
     public int GetLength()
     {
-        return lstTilemapDetail.Count;
+        return lstTilemapDetail?.Count ?? 0;
     }
     
 }

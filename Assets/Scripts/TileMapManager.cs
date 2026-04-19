@@ -27,6 +27,7 @@ public class TileMapManager:MonoBehaviour
         FirebaseApp app=FirebaseApp.DefaultInstance;
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         LoadMapForUser();
+        
     }
     void WriteAllTileMapToFirebase()
     {
@@ -42,11 +43,12 @@ public class TileMapManager:MonoBehaviour
         }
         map.lstTilemapDetail=tilemaps;
         Debug.Log(map.ToString());
-        databaseManager.WriteDatabase(user.UserId+"/Map" ,map.ToString());
+        LoadDataManager.userInGame.MapInGame=map;
+        databaseManager.WriteDatabase("User"+LoadDataManager.firebaseUser.UserId ,LoadDataManager.userInGame.ToString());
     }
     public void LoadMapForUser()
     {
-       reference.Child("Users").Child(user.UserId+"/Map").GetValueAsync().ContinueWithOnMainThread(task =>
+       reference.Child("Users").Child("User/"+user.UserId).GetValueAsync().ContinueWithOnMainThread(task =>
     {
         if(task.IsCanceled)return;
         else if(task.IsFaulted)return;
@@ -54,7 +56,11 @@ public class TileMapManager:MonoBehaviour
         {
             DataSnapshot snapshot=task.Result;
             Debug.Log("snapshot: " + snapshot.Value.ToString());
-            map=JsonConvert.DeserializeObject<Map>(snapshot.Value.ToString());
+            map=JsonConvert.DeserializeObject<User>(snapshot.Value.ToString()).MapInGame;
+            if(map==null)
+            {
+                WriteAllTileMapToFirebase();
+            }
 
         }
          Debug.Log("load map: " + map.ToString());
@@ -90,19 +96,17 @@ public class TileMapManager:MonoBehaviour
     }
     public void SetStateTilemapDetail(int x,int y,TilemapState state)
     {
-                        Debug.Log("Vao 1");
-
         for(int i=0;i<map.GetLength();i++)
         {
-                                    Debug.Log("Vao 2");
-
             if(map.lstTilemapDetail[i].x==x && map.lstTilemapDetail[i].y==y)
             {
                 map.lstTilemapDetail[i].tilemapState=state;
                 Debug.Log("Save to firebase succesful");
-                databaseManager.WriteDatabase(user.UserId+"/Map" ,map.ToString());
+                LoadDataManager.userInGame.MapInGame=map;
+                Debug.Log(LoadDataManager.userInGame.ToString());
+                databaseManager.WriteDatabase("User/"+LoadDataManager.firebaseUser.UserId ,LoadDataManager.userInGame.ToString());
+                //databaseManager.WriteDatabase(user.UserId+"/Map" ,map.ToString());
                 Debug.Log(map.ToString());
-
                 break;
 
             }
