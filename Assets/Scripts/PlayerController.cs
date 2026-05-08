@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class PlayerController : MonoBehaviour
     Vector2 targetPosition;
     bool isMovingByMouse = false;
     public Animator animator;
-
+    public Vector2 minPos; // góc trái dưới map
+    public Vector2 maxPos; // góc phải trên map
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -16,6 +18,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Chặn di chuyển khi đang nhập username hoặc chuột trên UI
+        bool isUiPointer = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+        if (UsernameWizard.IsUsernameWizardOpen || isUiPointer)
+        {
+            movement = Vector2.zero;
+            isMovingByMouse = false;
+            animator.SetFloat("Horizontal", 0f);
+            animator.SetFloat("Vertical", 0f);
+            animator.SetFloat("Speed", 0f);
+            return;
+        }
+
         // Nhấn chuột → dùng chuột
         if (Input.GetMouseButtonDown(0))
         {
@@ -46,13 +60,26 @@ public class PlayerController : MonoBehaviour
             movement = Vector2.zero;
         }
 
+        // Phát âm thanh bước chân (AudioManager sẽ xử lý cooldown)
+        if (movement.sqrMagnitude > 0)
+        {
+            AudioManager.Instance.PlayWalk();
+        }
+
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
+        
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        Vector2 newPosition = rb.position + movement * moveSpeed * Time.fixedDeltaTime;
+        
+        // Chặn di chuyển trong giới hạn map
+        newPosition.x = Mathf.Clamp(newPosition.x, minPos.x, maxPos.x);
+        newPosition.y = Mathf.Clamp(newPosition.y, minPos.y, maxPos.y);
+        
+        rb.MovePosition(newPosition);
     }
 }

@@ -8,16 +8,20 @@ public class CellItemData : MonoBehaviour,ICell
     //UI
 public TextMeshProUGUI nameLabel;
 public TextMeshProUGUI desLabel;
+
+public TextMeshProUGUI quantityLabel;
+
 //Model
-private Invenitems _contactInfo;
+private Invenitem _contactInfo;
 private int _cellIndex;
 //This is called from the SetCell method in DataSource
-public void ConfigureCell(Invenitems invenitems,int cellIndex)
+public void ConfigureCell(Invenitem Invenitem,int cellIndex)
 {
 _cellIndex = cellIndex;
-_contactInfo = invenitems;
-nameLabel.text = invenitems.name;
-desLabel.text = invenitems.Description;
+_contactInfo = Invenitem;
+nameLabel.text = Invenitem.name;
+desLabel.text = Invenitem.Description;
+quantityLabel.text = Invenitem.quantity.ToString();
 }
 
 }

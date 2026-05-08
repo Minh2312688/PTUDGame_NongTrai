@@ -23,9 +23,10 @@ public class TileMapManager:MonoBehaviour
         map=new Map();
         databaseManager=GameObject.Find("DatabaseManager").GetComponent<FireBaseDatabaseManager>();
         user=FirebaseAuth.DefaultInstance.CurrentUser;
-        //WriteAllTileMapToFirebase();
         FirebaseApp app=FirebaseApp.DefaultInstance;
         reference = FirebaseDatabase.DefaultInstance.RootReference;
+        //WriteAllTileMapToFirebase();
+
         LoadMapForUser();
         
     }
@@ -42,9 +43,8 @@ public class TileMapManager:MonoBehaviour
 
         }
         map.lstTilemapDetail=tilemaps;
-        Debug.Log(map.ToString());
-        LoadDataManager.userInGame.MapInGame=map;
-        databaseManager.WriteDatabase("User"+LoadDataManager.firebaseUser.UserId ,LoadDataManager.userInGame.ToString());
+        LoadDataManager.userInGame.MapInGame.lstTilemapDetail=map.lstTilemapDetail;
+        databaseManager.WriteDatabase("User/"+LoadDataManager.firebaseUser.UserId ,LoadDataManager.userInGame.ToString());
     }
     public void LoadMapForUser()
     {
@@ -57,7 +57,9 @@ public class TileMapManager:MonoBehaviour
             DataSnapshot snapshot=task.Result;
             Debug.Log("snapshot: " + snapshot.Value.ToString());
             map=JsonConvert.DeserializeObject<User>(snapshot.Value.ToString()).MapInGame;
-            if(map==null)
+            Debug.Log("load map: " + map.ToString());
+
+            if(map.lstTilemapDetail==null)
             {
                 WriteAllTileMapToFirebase();
             }
@@ -105,7 +107,6 @@ public class TileMapManager:MonoBehaviour
                 LoadDataManager.userInGame.MapInGame=map;
                 Debug.Log(LoadDataManager.userInGame.ToString());
                 databaseManager.WriteDatabase("User/"+LoadDataManager.firebaseUser.UserId ,LoadDataManager.userInGame.ToString());
-                //databaseManager.WriteDatabase(user.UserId+"/Map" ,map.ToString());
                 Debug.Log(map.ToString());
                 break;
 

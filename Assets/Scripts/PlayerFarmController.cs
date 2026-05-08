@@ -32,6 +32,8 @@ public class PlayerFarmController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.C))
         {
+            AudioManager.Instance.PlayDig();
+
             Vector3Int cellPos = tm_Ground.WorldToCell(transform.position);
             Debug.Log("Cell Position: " + cellPos);
             TileBase currentTile = tm_Grass.GetTile(cellPos);
@@ -43,6 +45,7 @@ public class PlayerFarmController : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.V))
         {
+            AudioManager.Instance.PlayPlantGrow();
             Vector3Int cellPos = tm_Ground.WorldToCell(transform.position);
             Debug.Log("Cell Position: " + cellPos);
             TileBase currentTile = tm_Grass.GetTile(cellPos);
@@ -57,6 +60,8 @@ public class PlayerFarmController : MonoBehaviour
         //Thu hoạch cây
         if (Input.GetKeyDown(KeyCode.M))
         {
+            AudioManager.Instance.PlayPlantHarvest();
+
             Vector3Int cellPos = tm_Ground.WorldToCell(transform.position);
             Debug.Log("Cell Position: " + cellPos);
             TileBase currentTile = tm_Forest.GetTile(cellPos);
@@ -65,7 +70,7 @@ public class PlayerFarmController : MonoBehaviour
                 tm_Forest.SetTile(cellPos, null);// chặt cây
                 tm_Grass.SetTile(cellPos, tb_Grass);// trồng cỏ
                 //Lay item va them vao tui do
-                Invenitems itemFlower = new Invenitems();
+                Invenitem itemFlower = new Invenitem();
                 itemFlower.name = "Hoa 1h";
                 itemFlower.Description="Hoa này trang trí rất đẹp";
                 Debug.Log("Thu hoạch được: " + itemFlower.name);

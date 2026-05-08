@@ -73,6 +73,13 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/[Aa]ssets/[Ss]prout[Ll]ands/aa.meta
+/[Aa]ssets/[Ss]prout[Ll]ands/aa/*
+/[Aa]ssets/[Ss]unnyside/aa.meta
+/[Aa]ssets/[Ss]unnyside/aa/*
+/[Aa]ssets/[Cc]ute_[Ff]antasy_[Ff]ree/aa.meta
+/[Aa]ssets/[Cc]ute_[Ff]antasy_[Ff]ree/aa/*
+
 # Packed Addressables
 /[Aa]ssets/[Ff]irebase
 

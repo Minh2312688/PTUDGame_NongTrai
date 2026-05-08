@@ -17,7 +17,7 @@ public class FirebaseLoginManager:MonoBehaviour
     public InputField ipLoginPassword;
     public Button btnLogin;
     // Firebase authencantion -->đăng ký, đăng nhập
-    FirebaseAuth auth;
+    static FirebaseAuth auth;
     //Chuyển đổi qua lại giữa đăng ký và đăng nhập
     [Header("Switch form")]
     public Button btnMoveToLogin;
@@ -44,20 +44,17 @@ public class FirebaseLoginManager:MonoBehaviour
         if(password.Length < 6)
         {
             Debug.Log("Password phải >= 6 ký tự");
-            return;
         }
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread( task =>
         {
             if (task.IsCanceled)
             {
                 Debug.LogError("Đăng ký bị hủy");
-                return;
             }
 
             if (task.IsFaulted)
             {
                 Debug.LogError("Đăng ký bị thất bại: " + task.Exception);
-                return;
             }
 
             // Firebase user has been created.
@@ -100,11 +97,14 @@ public class FirebaseLoginManager:MonoBehaviour
             SceneManager.LoadScene("PlayScene");
         });
     }
+    public static void SignOut()
+    {
+        auth.SignOut();
+        SceneManager.LoadScene("LoginScene");
+    }
     public void SwitchForm ()
     {
         loginForm.SetActive(!loginForm.activeSelf);
         registerForm.SetActive(!registerForm.activeSelf);
-        
-        
     }
 }
