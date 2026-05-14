@@ -20,24 +20,29 @@ public class PlayerController : MonoBehaviour
     {
         // Chặn di chuyển khi đang nhập username hoặc chuột trên UI
         bool isUiPointer = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
-        if (UsernameWizard.IsUsernameWizardOpen || isUiPointer)
+        // Chỉ chặn hoàn toàn khi username wizard mở
+        if (UsernameWizard.IsUsernameWizardOpen)
         {
             movement = Vector2.zero;
             isMovingByMouse = false;
+
             animator.SetFloat("Horizontal", 0f);
             animator.SetFloat("Vertical", 0f);
             animator.SetFloat("Speed", 0f);
             return;
         }
 
-        // Nhấn chuột → dùng chuột
         if (Input.GetMouseButtonDown(0))
         {
-            targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            isMovingByMouse = true;
+            // Chỉ cho click move khi inventory đóng
+            if (!GameManager.instance.uiManager.inventoryPanel.activeSelf)
+            {
+                targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                isMovingByMouse = true;
+            }
         }
 
-        // Nhấn phím → ưu tiên bàn phím
+        // WASD luôn hoạt động
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
@@ -60,7 +65,6 @@ public class PlayerController : MonoBehaviour
             movement = Vector2.zero;
         }
 
-        // Phát âm thanh bước chân (AudioManager sẽ xử lý cooldown)
         if (movement.sqrMagnitude > 0)
         {
             AudioManager.Instance.PlayWalk();
@@ -69,7 +73,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
-        
+    
     }
 
     void FixedUpdate()
