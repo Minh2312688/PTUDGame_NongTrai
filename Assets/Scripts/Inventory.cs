@@ -71,6 +71,7 @@ public class Inventory
 
     public List<Slot> slots = new List<Slot>();
 
+    public Slot selectedSlot = null;
     public Inventory(int numSlots)
     {
         for (int i = 0; i < numSlots; i++)
@@ -120,17 +121,29 @@ public class Inventory
 
     public void MoveSlot(int fromIndex, int toIndex, Inventory toInventory, int numToMove  = 1)
     {
-        Slot fromSlot = slots[fromIndex];
-        Slot toSlot = toInventory.slots[toIndex];
-
-        if(toSlot.IsEmpty || toSlot.CanAddItem(fromSlot.itemName))
+        if (slots != null && slots.Count > 0)
         {
-            for(int i = 0; i < numToMove; i++)
+            Slot fromSlot = slots[fromIndex];
+            Slot toSlot = toInventory.slots[toIndex];
+
+            for (int i = 0; i < numToMove; i++)
             {
-                toSlot.AddItem(fromSlot.itemName, fromSlot.icon, fromSlot.maxAllowed);
-                fromSlot.RemoveItem();
+                if (toSlot.IsEmpty || toSlot.CanAddItem(fromSlot.itemName))
+                {
+                    toSlot.AddItem(fromSlot.itemName, fromSlot.icon, fromSlot.maxAllowed);
+                    fromSlot.RemoveItem();
+                }
+
             }
-            
+        }
+       
+    }
+
+    public void SelectSlot(int index)
+    {
+        if (slots != null && slots.Count > 0)
+        {
+            selectedSlot = slots[index];
         }
     }
 }

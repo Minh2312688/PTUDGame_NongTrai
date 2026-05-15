@@ -37632,7 +37632,7 @@ MonoBehaviour:
   - {fileID: 361252518}
   - {fileID: 597104038}
   - {fileID: 35309304}
-  canvas: {fileID: 0}
+  canvas: {fileID: 1233354796}
 --- !u!1001 &402601386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48054,6 +48054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemManager
   items:
   - {fileID: 4789001499069634651, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
+  - {fileID: 1444791888378183533, guid: 640c55524d35bca4190f606f34078040, type: 3}
 --- !u!114 &683846999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48066,10 +48067,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb334ccf3655b9446b2ecc603c7ea1ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  itemManager: {fileID: 0}
-  tileManager: {fileID: 0}
-  uiManager: {fileID: 0}
-  player: {fileID: 0}
+  itemManager: {fileID: 683846998}
+  tileManager: {fileID: 683847001}
+  uiManager: {fileID: 683847002}
+  player: {fileID: 1901149184}
 --- !u!4 &683847000
 Transform:
   m_ObjectHideFlags: 0
@@ -48099,7 +48100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileManager
   interactableMap: {fileID: 1900624413}
   hiddenInteractableTile: {fileID: 11400000, guid: 95ce03f2e99423e478d44ff37e7da3db, type: 2}
-  interactedTile: {fileID: 11400000, guid: 08b0f526b16a21245ab9f4a8b2177857, type: 2}
+  plowedTile: {fileID: 11400000, guid: 08b0f526b16a21245ab9f4a8b2177857, type: 2}
 --- !u!114 &683847002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49635,63 +49636,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c512c6e2d95855e4a87f0fd428e961e6, type: 3}
---- !u!1001 &1033934315
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1022012156784998523, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
-      propertyPath: m_Name
-      value: Collectable
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998881461649112659, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998881461649112659, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998881461649112659, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998881461649112659, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998881461649112659, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998881461649112659, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998881461649112659, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998881461649112659, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998881461649112659, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998881461649112659, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: de4bb6a60fa3695409e8bbf99a28ae35, type: 3}
 --- !u!1 &1053550922
 GameObject:
   m_ObjectHideFlags: 0
@@ -51759,7 +51703,7 @@ MonoBehaviour:
   - {fileID: 564543343}
   - {fileID: 1296412450}
   - {fileID: 1015624985}
-  canvas: {fileID: 0}
+  canvas: {fileID: 1233354796}
 --- !u!1 &1409582153
 GameObject:
   m_ObjectHideFlags: 0
@@ -58461,7 +58405,7 @@ TilemapRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -58726,7 +58670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957121fc9cfc34543b5ad9497dee0c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  inventory: {fileID: 0}
+  inventoryManager: {fileID: 0}
 --- !u!114 &1901149185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58741,9 +58685,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
   backpack:
     slots: []
+    selectedSlot:
+      itemName: 
+      count: 0
+      maxAllowed: 99
+      icon: {fileID: 0}
   backpackSlotCount: 21
   toolbar:
     slots: []
+    selectedSlot:
+      itemName: 
+      count: 0
+      maxAllowed: 99
+      icon: {fileID: 0}
   toolbarSlotCount: 9
 --- !u!1001 &1913702864
 PrefabInstance:
@@ -60297,6 +60251,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c512c6e2d95855e4a87f0fd428e961e6, type: 3}
+--- !u!1001 &1018423496902944090
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5680465295345883363, guid: 640c55524d35bca4190f606f34078040, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680465295345883363, guid: 640c55524d35bca4190f606f34078040, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680465295345883363, guid: 640c55524d35bca4190f606f34078040, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680465295345883363, guid: 640c55524d35bca4190f606f34078040, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680465295345883363, guid: 640c55524d35bca4190f606f34078040, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680465295345883363, guid: 640c55524d35bca4190f606f34078040, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680465295345883363, guid: 640c55524d35bca4190f606f34078040, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680465295345883363, guid: 640c55524d35bca4190f606f34078040, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680465295345883363, guid: 640c55524d35bca4190f606f34078040, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680465295345883363, guid: 640c55524d35bca4190f606f34078040, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5818025503692318205, guid: 640c55524d35bca4190f606f34078040, type: 3}
+      propertyPath: m_Name
+      value: Hoe_Collectable
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 640c55524d35bca4190f606f34078040, type: 3}
 --- !u!1001 &1746985690914278389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60467,10 +60478,10 @@ SceneRoots:
   - {fileID: 412166413}
   - {fileID: 1233354797}
   - {fileID: 683847000}
-  - {fileID: 1033934315}
   - {fileID: 889158923}
   - {fileID: 1831612779}
   - {fileID: 2021754161}
   - {fileID: 324096105}
+  - {fileID: 1018423496902944090}
   - {fileID: 1053550924}
   - {fileID: 1790505592}
