@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 24a55b049bdd98b46b46983818bb98ed
+guid: f6f8964ae0c22a14ca42510a9fc9b7f8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3184159518366690391
-    second: Sheep_0
+      213: 5336855417275088078
+    second: Chicken_0
   - first:
-      213: -94349284460663922
-    second: Sheep_1
+      213: -1433109330887674863
+    second: Chicken_1
   - first:
-      213: -153997217174440492
-    second: Sheep_2
+      213: -1642514149361250337
+    second: Chicken_2
   - first:
-      213: 2216007762293242776
-    second: Sheep_3
+      213: -6988750562667468047
+    second: Chicken_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sheep_0
+      name: Chicken_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 9
         y: 39
-        width: 21
-        height: 18
+        width: 15
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,19 +137,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 75cec682638603c20800000000000000
-      internalID: 3184159518366690391
+      spriteID: eccfc44e9b1501a40800000000000000
+      internalID: 5336855417275088078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sheep_1
+      name: Chicken_1
       rect:
         serializedVersion: 2
-        x: 36
+        x: 41
         y: 39
-        width: 21
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 114742018a29c1ce0800000000000000
+      internalID: -1433109330887674863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chicken_2
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 7
+        width: 15
         height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -159,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e8be8ee53ddc0bef0800000000000000
-      internalID: -94349284460663922
+      spriteID: fdf05c4651e9439e0800000000000000
+      internalID: -1642514149361250337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sheep_2
+      name: Chicken_3
       rect:
         serializedVersion: 2
-        x: 4
+        x: 41
         y: 7
-        width: 22
-        height: 19
+        width: 15
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,30 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4d53bedc854ecddf0800000000000000
-      internalID: -153997217174440492
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sheep_3
-      rect:
-        serializedVersion: 2
-        x: 36
-        y: 7
-        width: 22
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 89b3ff2a157d0ce10800000000000000
-      internalID: 2216007762293242776
+      spriteID: 1fae4682468f20f90800000000000000
+      internalID: -6988750562667468047
       vertices: []
       indices: 
       edges: []
@@ -223,10 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sheep_0: 3184159518366690391
-      Sheep_1: -94349284460663922
-      Sheep_2: -153997217174440492
-      Sheep_3: 2216007762293242776
+      Chicken_0: 5336855417275088078
+      Chicken_1: -1433109330887674863
+      Chicken_2: -1642514149361250337
+      Chicken_3: -6988750562667468047
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

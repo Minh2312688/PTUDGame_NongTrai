@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 24a55b049bdd98b46b46983818bb98ed
+guid: 1dea6422cf4e20444b747a4328251205
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3184159518366690391
-    second: Sheep_0
+      213: 6602966838755796383
+    second: Cow_0
   - first:
-      213: -94349284460663922
-    second: Sheep_1
+      213: -7810360661050545635
+    second: Cow_1
   - first:
-      213: -153997217174440492
-    second: Sheep_2
+      213: -5649190053744765936
+    second: Cow_2
   - first:
-      213: 2216007762293242776
-    second: Sheep_3
+      213: 5381308046820054851
+    second: Cow_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 14
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -122,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sheep_0
+      name: Cow_0
       rect:
         serializedVersion: 2
         x: 4
-        y: 39
-        width: 21
-        height: 18
+        y: 36
+        width: 26
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 75cec682638603c20800000000000000
-      internalID: 3184159518366690391
+      spriteID: f9529b71b5372ab50800000000000000
+      internalID: 6602966838755796383
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sheep_1
+      name: Cow_1
       rect:
         serializedVersion: 2
         x: 36
-        y: 39
-        width: 21
-        height: 17
+        y: 36
+        width: 26
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,20 +159,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e8be8ee53ddc0bef0800000000000000
-      internalID: -94349284460663922
+      spriteID: d1aa56e1c560c9390800000000000000
+      internalID: -7810360661050545635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sheep_2
+      name: Cow_2
       rect:
         serializedVersion: 2
-        x: 4
-        y: 7
-        width: 22
-        height: 19
+        x: 3
+        y: 4
+        width: 27
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4d53bedc854ecddf0800000000000000
-      internalID: -153997217174440492
+      spriteID: 0149fd9a39b0a91b0800000000000000
+      internalID: -5649190053744765936
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sheep_3
+      name: Cow_3
       rect:
         serializedVersion: 2
-        x: 36
-        y: 7
-        width: 22
-        height: 19
+        x: 35
+        y: 4
+        width: 27
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 89b3ff2a157d0ce10800000000000000
-      internalID: 2216007762293242776
+      spriteID: 34719ad382f3eaa40800000000000000
+      internalID: 5381308046820054851
       vertices: []
       indices: 
       edges: []
@@ -223,10 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sheep_0: 3184159518366690391
-      Sheep_1: -94349284460663922
-      Sheep_2: -153997217174440492
-      Sheep_3: 2216007762293242776
+      Cow_0: 6602966838755796383
+      Cow_1: -7810360661050545635
+      Cow_2: -5649190053744765936
+      Cow_3: 5381308046820054851
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
