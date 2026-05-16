@@ -45,10 +45,10 @@ public class Pig : MonoBehaviour
     {
         // Random trong hàng rào
         float randomX =
-            Random.Range(-4f, 4f);
+            Random.Range(-3.5f, 3.5f);
 
         float randomY =
-            Random.Range(-5f, 5f);
+            Random.Range(-4.5f, 4.5f);
 
         // Tính vị trí mới
         targetPosition =

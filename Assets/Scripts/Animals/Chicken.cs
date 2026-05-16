@@ -2,51 +2,77 @@ using UnityEngine;
 
 public class Chicken : MonoBehaviour
 {
+    // Tốc độ đi
     public float speed = 2f;
 
-    private Vector2 targetPosition;
+    // Điểm muốn tới
+    private Vector3 targetPosition;
 
-    private Rigidbody2D rb;
+    // Vị trí ban đầu
+    private Vector3 startPosition;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        // Lưu vị trí gốc
+        startPosition = transform.position;
 
+        // Chọn điểm random đầu tiên
         SetNewTarget();
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        Vector2 direction = targetPosition - rb.position;
-
-        Vector2 newPosition = Vector2.MoveTowards(
-            rb.position,
+        // Di chuyển tới điểm target
+        transform.position = Vector3.MoveTowards(
+            transform.position,
             targetPosition,
-            speed * Time.fixedDeltaTime);
+            speed * Time.deltaTime);
 
-        rb.MovePosition(newPosition);
-
-        // Quay mặt theo hướng đi
-        if(direction.x > 0)
-            {
-                 transform.localScale = new Vector3(-1, 1, 1);
-            }
-        else if(direction.x < 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
-
-        // Tới nơi → đổi chỗ mới
-        if(Vector2.Distance(rb.position, targetPosition) < 0.2f)
+        // Nếu gần tới nơi
+        if(Vector3.Distance(
+            transform.position,
+            targetPosition) < 0.2f)
         {
+            // Chọn vị trí mới
             SetNewTarget();
         }
+
+        // Quay mặt đúng hướng
+        FlipChicken();
     }
+
     void SetNewTarget()
     {
-        float randomX = Random.Range(22f, 30f);
-        float randomY = Random.Range(-12f, -2.5f);
+        // Random trong hàng rào
+        float randomX =
+            Random.Range(-3.5f, 3.5f);
 
-        targetPosition = new Vector2(randomX, randomY);
+        float randomY =
+            Random.Range(-4.5f, 4.5f);
+
+        // Tính vị trí mới
+        targetPosition =
+            startPosition +
+            new Vector3(
+                randomX,
+                randomY,
+                0);
+    }
+
+    void FlipChicken()
+    {
+        // Đi phải
+        if(targetPosition.x >
+            transform.position.x)
+        {
+            transform.localScale =
+                new Vector3(-1,1,1);
+        }
+        // Đi trái
+        else
+        {
+            transform.localScale =
+                new Vector3(1,1,1);
+        }
     }
 }
