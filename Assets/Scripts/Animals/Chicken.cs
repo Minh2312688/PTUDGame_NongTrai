@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ChickenAI : MonoBehaviour
+public class Chicken : MonoBehaviour
 {
     public float speed = 2f;
 
