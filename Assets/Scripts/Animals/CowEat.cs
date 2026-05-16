@@ -3,8 +3,8 @@ using System.Collections;
 
 public class CowEat : Animal
 {
-    // Prefab thịt
-    public GameObject meatPrefab;
+    // Prefab sữa
+    public GameObject MilkPrefab;
 
     // Đếm số lần sinh
     private int spawnCount = 0;
@@ -19,7 +19,7 @@ public class CowEat : Animal
         // Lần đầu tự sinh
         yield return new WaitForSeconds(9f);
 
-        SpawnMeat();
+        SpawnMilk();
 
         // Các lần sau phải ăn
         while(spawnCount < 3)
@@ -34,7 +34,7 @@ public class CowEat : Animal
             // Chờ tiêu hóa
             yield return new WaitForSeconds(9f);
 
-            SpawnMeat();
+            SpawnMilk();
 
             // Reset
             isFed = false;
@@ -43,15 +43,15 @@ public class CowEat : Animal
         Die();
     }
 
-    void SpawnMeat()
+    void SpawnMilk()
     {
         // Vị trí sinh
         Vector3 spawnPos =
             transform.position + Vector3.right;
 
-        // Sinh thịt
+        // Sinh sữa
         Instantiate(
-            meatPrefab,
+            MilkPrefab,
             spawnPos,
             Quaternion.identity);
 
