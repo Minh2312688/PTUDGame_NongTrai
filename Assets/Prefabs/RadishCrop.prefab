@@ -104,9 +104,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adf38356b1c08140a248cace4e92f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Crop
+  tilePosition: {x: 0, y: 0, z: 0}
   growthStages:
   - {fileID: -1044968166336746788, guid: 7090e0e047b77014a9561d174e404a90, type: 3}
   - {fileID: 934722249265953344, guid: 7090e0e047b77014a9561d174e404a90, type: 3}
   - {fileID: 6330426110891526577, guid: 7090e0e047b77014a9561d174e404a90, type: 3}
   - {fileID: -8046388129001153825, guid: 7090e0e047b77014a9561d174e404a90, type: 3}
-  growTime: 15
+  growthTime: 15
+  harvestItem: {fileID: 4789001499069634651, guid: f52a79e2b4263fc488d46807bcf4023e, type: 3}

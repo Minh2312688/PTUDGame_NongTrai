@@ -22,20 +22,6 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    //public bool IsInteractable(Vector3Int position)
-    //{
-    //    TileBase tile = interactableMap.GetTile(position);
-
-    //    if (tile != null)
-    //    {
-    //        if (tile.name == "interactable")
-    //        { 
-    //            return true;
-    //        }
-    //    }
-    //    return false;
-    //}
-
     public void SetInteracted(Vector3Int position)
     {
         interactableMap.SetTile(position, plowedTile);
@@ -61,11 +47,29 @@ public class TileManager : MonoBehaviour
         Vector3 spawnPosition =
             interactableMap.GetCellCenterWorld(position);
 
-        Instantiate(cropData.cropPrefab,
-            spawnPosition,
-            Quaternion.identity);
+        GameObject cropObj =
+    Instantiate(
+        cropData.cropPrefab,
+        spawnPosition,
+        Quaternion.identity);
+
+        Crop crop = cropObj.GetComponent<Crop>();
+
+        crop.tilePosition = position;
 
         interactableMap.SetTile(position, plantedTile);
+    }
+
+    //public void SetPlowed(Vector3Int position)
+    //{
+    //    interactableMap.SetTile(position, plowedTile);
+    //}
+
+    public void ResetPlowed(Vector3Int position)
+    {
+        interactableMap.SetTile(
+            position,
+            hiddenInteractableTile);
     }
 
 }

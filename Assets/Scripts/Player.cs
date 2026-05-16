@@ -53,6 +53,33 @@ public class Player : MonoBehaviour
                             GameManager.instance.uiManager.RefreshAll();
                         }
                     }
+
+                    else if (inventoryManager.toolbar.selectedSlot.itemName == "Scythe")
+                    {
+                        Collider2D hit =
+                            Physics2D.OverlapCircle(
+                                transform.position,
+                                1f);
+
+                        if (hit != null)
+                        {
+                            Crop[] crops = FindObjectsByType<Crop>(
+    FindObjectsSortMode.None);
+
+                            foreach (Crop crop in crops)
+                            {
+                                if (crop.tilePosition == position)
+                                {
+                                    if (crop.CanHarvest())
+                                    {
+                                        crop.Harvest();
+
+                                        tileManager.ResetPlowed(position);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
