@@ -20,15 +20,38 @@ public class Player : MonoBehaviour
         {
             if (tileManager != null)
             {
-                Vector3Int position = new Vector3Int((int)transform.position.x, (int)transform.position.y, 0);
-                
+                // Vector3Int position = new Vector3Int((int)transform.position.x, (int)transform.position.y, 0);
+                Vector3Int position =
+    tileManager.interactableMap.WorldToCell(transform.position);
                 string tileName  = tileManager.GetTileName(position);
-
+                Debug.Log(tileName);
+                Debug.Log(inventoryManager.toolbar.selectedSlot.itemName);
                 if (!string.IsNullOrWhiteSpace(tileName))
                 {
+                    // Đào đất
                     if(tileName == "Interactable" && inventoryManager.toolbar.selectedSlot.itemName == "Hoe")
                     {
                         tileManager.SetInteracted(position);
+                    }
+
+                    // GIEO HẠT
+                    else if (tileName == "Summer_Plowed")
+                    {
+                        ItemData selectedItem =
+                        inventoryManager.toolbar.selectedSlot.itemData;
+
+                        if (selectedItem != null &&
+                            selectedItem.cropData != null)
+                        {
+                            Debug.Log(selectedItem.itemName);
+                            Debug.Log(selectedItem.cropData);
+
+                            tileManager.PlantCrop(position, selectedItem.cropData);
+
+                            inventoryManager.toolbar.selectedSlot.RemoveItem();
+
+                            GameManager.instance.uiManager.RefreshAll();
+                        }
                     }
                 }
             }

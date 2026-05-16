@@ -13,6 +13,8 @@ public class Inventory
 
         public Sprite icon;
 
+        public ItemData itemData;
+
         public Slot()
         {
             itemName = "";
@@ -44,13 +46,20 @@ public class Inventory
         {
             this.itemName = item.data.itemName;
             this.icon = item.data.icon;
+            this.itemData = item.data;
+
             count++;
         }
 
-        public void AddItem(string itemName, Sprite icon, int maxAllowed)
+        public void AddItem(string itemName,
+                    Sprite icon,
+                    int maxAllowed,
+                    ItemData itemData)
         {
             this.itemName = itemName;
             this.icon = icon;
+            this.itemData = itemData;
+
             count++;
             this.maxAllowed = maxAllowed;
         }
@@ -64,6 +73,7 @@ public class Inventory
                 {
                     itemName = "";
                     icon = null;
+                    itemData = null;
                 }
             }
         }
@@ -72,6 +82,8 @@ public class Inventory
     public List<Slot> slots = new List<Slot>();
 
     public Slot selectedSlot = null;
+
+
     public Inventory(int numSlots)
     {
         for (int i = 0; i < numSlots; i++)
@@ -130,7 +142,7 @@ public class Inventory
             {
                 if (toSlot.IsEmpty || toSlot.CanAddItem(fromSlot.itemName))
                 {
-                    toSlot.AddItem(fromSlot.itemName, fromSlot.icon, fromSlot.maxAllowed);
+                    toSlot.AddItem(fromSlot.itemName, fromSlot.icon, fromSlot.maxAllowed, fromSlot.itemData);
                     fromSlot.RemoveItem();
                 }
 

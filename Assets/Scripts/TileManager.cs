@@ -7,6 +7,10 @@ public class TileManager : MonoBehaviour
     public Tilemap interactableMap;
     public Tile hiddenInteractableTile;
     public Tile plowedTile;
+    public Tile plantedTile;
+
+    [Header("Crops")]
+    public GameObject wheatCropPrefab;
     void Start()
     {
         foreach(var pos in interactableMap.cellBounds.allPositionsWithin)
@@ -50,6 +54,18 @@ public class TileManager : MonoBehaviour
             }
         }
         return "";
+    }
+
+    public void PlantCrop(Vector3Int position, CropData cropData)
+    {
+        Vector3 spawnPosition =
+            interactableMap.GetCellCenterWorld(position);
+
+        Instantiate(cropData.cropPrefab,
+            spawnPosition,
+            Quaternion.identity);
+
+        interactableMap.SetTile(position, plantedTile);
     }
 
 }

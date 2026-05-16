@@ -25,21 +25,15 @@ public class Toolbar_UI : MonoBehaviour
 
     public void SelectSlot(int index)
     {
-        for (int i = 0; i < toolBarSlots.Count; i++)
+        if (selectedSlot != null)
         {
-            if(toolBarSlots.Count == 9)
-            {
-                if(selectedSlot != null)
-                {
-                    selectedSlot.SetHighlight(false);
-                }
-                selectedSlot  = toolBarSlots[index];
-                selectedSlot.SetHighlight(true);
-
-                GameManager.instance.player.inventoryManager.toolbar.SelectSlot(index);
-
-            }
+            selectedSlot.SetHighlight(false);
         }
+
+        selectedSlot = toolBarSlots[index];
+        selectedSlot.SetHighlight(true);
+
+        GameManager.instance.player.inventoryManager.toolbar.SelectSlot(index);
     }
 
     private void CheckAlphaNumericKeys()
