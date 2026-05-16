@@ -4,36 +4,72 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 public class TileManager : MonoBehaviour
 {
-    [SerializeField] private Tilemap interactableMap;
-    [SerializeField] private Tile hiddenInteractableTile;
-    [SerializeField] private Tile interactedTile;
+    public Tilemap interactableMap;
+    public Tile hiddenInteractableTile;
+    public Tile plowedTile;
+    public Tile plantedTile;
+
+    [Header("Crops")]
+    public GameObject wheatCropPrefab;
     void Start()
     {
         foreach(var pos in interactableMap.cellBounds.allPositionsWithin)
         {
             TileBase tile= interactableMap.GetTile(pos);
-
-           interactableMap.SetTile(pos,hiddenInteractableTile);
+            if (tile != null && tile.name == "Interactable_Visible")
+            { interactableMap.SetTile(pos, hiddenInteractableTile); }
+           
         }
     }
 
-    public bool IsInteractable(Vector3Int position)
+    public void SetInteracted(Vector3Int position)
     {
-        TileBase tile = interactableMap.GetTile(position);
+        interactableMap.SetTile(position, plowedTile);
+    }
 
-        if (tile != null)
+    public string GetTileName(Vector3Int position)
+    {
+        
+        if (interactableMap != null)
         {
-            if (tile.name == "Interactable")
-            { 
-                return true;
+            TileBase tile = interactableMap.GetTile(position);
+
+            if(tile != null)
+            {
+                return tile.name;
             }
         }
-        return false;
+        return "";
     }
 
-    public void SetInteractable(Vector3Int position)
+    public void PlantCrop(Vector3Int position, CropData cropData)
     {
-        interactableMap.SetTile(position, interactedTile);
+        Vector3 spawnPosition =
+            interactableMap.GetCellCenterWorld(position);
+
+        GameObject cropObj =
+    Instantiate(
+        cropData.cropPrefab,
+        spawnPosition,
+        Quaternion.identity);
+
+        Crop crop = cropObj.GetComponent<Crop>();
+
+        crop.tilePosition = position;
+
+        interactableMap.SetTile(position, plantedTile);
+    }
+
+    //public void SetPlowed(Vector3Int position)
+    //{
+    //    interactableMap.SetTile(position, plowedTile);
+    //}
+
+    public void ResetPlowed(Vector3Int position)
+    {
+        interactableMap.SetTile(
+            position,
+            hiddenInteractableTile);
     }
 
 }

@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60acb01c2dcf9f94d9ca27d67c18559b, type: 3}
-  m_Name: Wheat_Seeds
+  m_Name: Scythe
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Wheat Seeds
-  icon: {fileID: 5196230094273877852, guid: 129d4d818465df94eb57d144fe4a026d, type: 3}
+  itemName: Scythe
+  icon: {fileID: 8549692267302808760, guid: 03ac0f46508b37746a486451145cbf9f, type: 3}
+  cropData: {fileID: 0}
