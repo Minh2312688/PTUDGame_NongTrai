@@ -3,19 +3,41 @@ using System.Collections;
 
 public class EggPickup : MonoBehaviour
 {
+    private bool isMouseOver;
+
+    private InventoryManager inventoryManager;
+
+    private Item item;
+
+    private void Start()
+    {
+        inventoryManager =
+            FindObjectOfType<InventoryManager>();
+
+        item = GetComponent<Item>();
+    }
+
     private void OnMouseEnter()
     {
+        isMouseOver = true;
+
         CursorManager.instance.SetBao();
     }
 
     private void OnMouseExit()
     {
+        isMouseOver = false;
+
         CursorManager.instance.ResetCursor();
     }
 
-    private void OnMouseDown()
+    private void Update()
     {
-        StartCoroutine(PickupEgg());
+        if (isMouseOver &&
+            Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(PickupEgg());
+        }
     }
 
     IEnumerator PickupEgg()
@@ -23,13 +45,15 @@ public class EggPickup : MonoBehaviour
         // Tay nắm
         CursorManager.instance.SetBua();
 
-        // Delay để thấy animation
-        yield return new WaitForSeconds(0.10f);
+        yield return new WaitForSeconds(0.1f);
 
-        // Chuột bình thường
+        // Thêm vào túi đồ
+        inventoryManager.Add("Backpack", item);
+
+        // Reset chuột
         CursorManager.instance.ResetCursor();
 
-        // Xóa trứng
+        // Xóa item
         Destroy(gameObject);
     }
 }

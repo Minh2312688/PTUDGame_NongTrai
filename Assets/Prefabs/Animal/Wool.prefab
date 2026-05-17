@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 476687581584777687}
   - component: {fileID: 1365027096674311933}
   - component: {fileID: 4582104262745748834}
+  - component: {fileID: 8920848296295675978}
+  - component: {fileID: 4562471427153051918}
   m_Layer: 0
   m_Name: Wool
   m_TagString: Untagged
@@ -81,7 +83,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 7
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1800847564758328457, guid: 3fd5d69f710f09e4c87ae4656388ef31, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -140,4 +142,45 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.521
+  m_Radius: 0.4734373
+--- !u!50 &8920848296295675978
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315725771068285040}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &4562471427153051918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315725771068285040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac371734c2ac92046bdc6ea3c006c486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  data: {fileID: 11400000, guid: 107bbaec6191aae48a30478f10fea9eb, type: 2}
+  rb2d: {fileID: 0}
