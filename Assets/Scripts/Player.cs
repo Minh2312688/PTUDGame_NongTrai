@@ -21,8 +21,7 @@ public class Player : MonoBehaviour
             if (tileManager != null)
             {
                 // Vector3Int position = new Vector3Int((int)transform.position.x, (int)transform.position.y, 0);
-                Vector3Int position =
-    tileManager.interactableMap.WorldToCell(transform.position);
+                Vector3Int position = tileManager.interactableMap.WorldToCell(transform.position);
                 string tileName  = tileManager.GetTileName(position);
                 Debug.Log(tileName);
                 Debug.Log(inventoryManager.toolbar.selectedSlot.itemName);
@@ -54,6 +53,24 @@ public class Player : MonoBehaviour
                         }
                     }
 
+                    // TƯỚI NƯỚC
+
+                    else if (inventoryManager.toolbar.selectedSlot.itemName == "Watering Can")
+                    {
+                        Crop[] crops = FindObjectsByType<Crop>(FindObjectsSortMode.None);
+
+                        foreach (Crop crop in crops)
+                        {
+                            if (crop.tilePosition == position)
+                            {
+                                crop.WaterCrop();
+
+                                Debug.Log("Watered crop!");
+                            }
+                        }
+                    }
+
+                    // GẶT HÁI
                     else if (inventoryManager.toolbar.selectedSlot.itemName == "Scythe")
                     {
                         Collider2D hit =
@@ -63,8 +80,7 @@ public class Player : MonoBehaviour
 
                         if (hit != null)
                         {
-                            Crop[] crops = FindObjectsByType<Crop>(
-    FindObjectsSortMode.None);
+                            Crop[] crops = FindObjectsByType<Crop>(FindObjectsSortMode.None);
 
                             foreach (Crop crop in crops)
                             {

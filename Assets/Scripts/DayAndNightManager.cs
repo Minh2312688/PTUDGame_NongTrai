@@ -19,6 +19,9 @@ public class DayAndNightManager : MonoBehaviour
     FireBaseDatabaseManager databaseManager;
     DatabaseReference reference;
 
+    private int currentDay = 1;
+    private int lastHour = 0;
+
     void Awake()
     {
         databaseManager = GameObject.Find("DatabaseManager").GetComponent<FireBaseDatabaseManager>();
@@ -46,6 +49,14 @@ public class DayAndNightManager : MonoBehaviour
         realSecondsInday = (realSecondsInday * dayMultiplier) % 86400;
 
         int gameHours = Mathf.FloorToInt(realSecondsInday / 3600);
+        if (lastHour == 23 && gameHours == 0)
+        {
+            currentDay++;
+            Debug.Log("🌞 New Day: " + currentDay);
+        }
+
+        lastHour = gameHours;
+
         int gameMinutes = Mathf.FloorToInt((realSecondsInday % 3600) / 60);
 
         string timeFormatted = string.Format("{0:00}:{1:00}", gameHours, gameMinutes);
@@ -104,5 +115,21 @@ public class DayAndNightManager : MonoBehaviour
     public string GetCurrentTimeString()
     {
         return clockText.text;
+    }
+
+    // 📅 Lấy ngày hiện tại trong game
+    public int GetCurrentDay()
+    {
+        DateTime realtime = DateTime.Now;
+
+        float realSecondsInday =
+            realtime.Hour * 3600 +
+            realtime.Minute * 60 +
+            realtime.Second;
+
+        float totalGameDays =
+            (realSecondsInday * dayMultiplier) / 86400f;
+
+        return Mathf.FloorToInt(totalGameDays);
     }
 }

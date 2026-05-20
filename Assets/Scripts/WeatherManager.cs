@@ -27,7 +27,7 @@ public class WeatherManager : MonoBehaviour
     public Sprite rain;
     public Sprite moon;
 
-    private bool isRaining = false;
+    public bool isRaining = false;
     private DayAndNightManager dayNightManager;
     private float saveTimer = 0f;
     private FirebaseUser user;
@@ -198,5 +198,10 @@ public class WeatherManager : MonoBehaviour
         {
             databaseManager.WriteDatabase("Weather/" + user.UserId, isRaining.ToString());
         }
+    }
+
+    public bool IsRaining()
+    {
+        return isRaining;
     }
 }

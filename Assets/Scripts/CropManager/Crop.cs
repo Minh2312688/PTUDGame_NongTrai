@@ -4,6 +4,7 @@ public class Crop : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     public Vector3Int tilePosition;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -22,16 +23,49 @@ public class Crop : MonoBehaviour
 
     private bool fullyGrown = false;
 
+    private bool isWatered = false;
+
+    private DayAndNightManager dayManager;
+    private WeatherManager weatherManager;
+
+    private int lastWateredDay = -1;
+
     private void Start()
     {
         spriteRenderer.sprite = growthStages[0];
+
+        dayManager = FindFirstObjectByType<DayAndNightManager>();
+        weatherManager = FindFirstObjectByType<WeatherManager>();
     }
 
     private void Update()
     {
+        if (dayManager != null)
+        {
+            int currentDay = dayManager.GetCurrentDay();
+
+            if (currentDay != lastWateredDay)
+            {
+                isWatered = false;
+            }
+        }
+
         if (fullyGrown) return;
 
-        timer += Time.deltaTime;
+        float growthSpeed = 1f;
+
+        if (isWatered)
+        {
+            growthSpeed += 1f;
+        }
+
+        if (weatherManager != null &&
+            weatherManager.IsRaining())
+        {
+            growthSpeed += 0.5f;
+        }
+
+        timer += Time.deltaTime * growthSpeed;
 
         float timePerStage =
             growthTime / (growthStages.Length - 1);
@@ -58,6 +92,17 @@ public class Crop : MonoBehaviour
     public bool CanHarvest()
     {
         return fullyGrown;
+    }
+
+    public void WaterCrop()
+    {
+        isWatered = true;
+
+        if (dayManager != null)
+        {
+            lastWateredDay =
+                dayManager.GetCurrentDay();
+        }
     }
 
     public void Harvest()
