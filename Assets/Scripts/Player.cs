@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 public class Player : MonoBehaviour
 {
     public InventoryManager inventoryManager;
@@ -16,6 +16,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        //if (EventSystem.current.IsPointerOverGameObject())
+        //{
+        //    return;
+        //}
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (tileManager != null)

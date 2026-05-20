@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Crop : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
@@ -29,6 +29,14 @@ public class Crop : MonoBehaviour
     private WeatherManager weatherManager;
 
     private int lastWateredDay = -1;
+
+    public Image growthBarFill;
+
+    private float totalGrowthTimer = 0f;
+
+    public Color normalColor = Color.yellow;
+    public Color wateredColor = Color.cyan;
+    public Color dryColor = Color.red;
 
     private void Start()
     {
@@ -67,6 +75,27 @@ public class Crop : MonoBehaviour
 
         timer += Time.deltaTime * growthSpeed;
 
+        totalGrowthTimer += Time.deltaTime * growthSpeed;
+
+        if (isWatered)
+        {
+            growthBarFill.color = wateredColor;
+        }
+        else
+        {
+            growthBarFill.color = dryColor;
+        }
+
+        if (weatherManager.IsRaining())
+        {
+            growthBarFill.color = Color.blue;
+        }
+
+        float progress =
+            totalGrowthTimer / growthTime;
+
+        growthBarFill.fillAmount = progress;
+
         float timePerStage =
             growthTime / (growthStages.Length - 1);
 
@@ -82,6 +111,7 @@ public class Crop : MonoBehaviour
                     growthStages.Length - 1;
 
                 fullyGrown = true;
+                growthBarFill.transform.parent.gameObject.SetActive(false);
             }
 
             spriteRenderer.sprite =
@@ -118,5 +148,25 @@ public class Crop : MonoBehaviour
             Quaternion.identity);
         itemObj.rb2d.AddForce(offset * 2f, ForceMode2D.Impulse);
         Destroy(gameObject);
+    }
+
+    public float GetGrowthPercent()
+    {
+        return ((float)currentStage /
+            (growthStages.Length - 1)) * 100f;
+    }
+
+    public float GetRemainingTime()
+    {
+        float totalProgress =
+            ((float)currentStage /
+            (growthStages.Length - 1)) * growthTime;
+
+        return growthTime - totalProgress;
+    }
+
+    public bool IsWatered()
+    {
+        return isWatered;
     }
 }
