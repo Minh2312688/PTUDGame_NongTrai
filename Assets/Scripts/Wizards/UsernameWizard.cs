@@ -27,7 +27,7 @@ public class UsernameWizard : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        databaseManager = GameObject.Find("DatabaseManager").GetComponent<FireBaseDatabaseManager>();
+        databaseManager = FireBaseDatabaseManager.Instance;
         SetUsernameWizardActive(false);
 
         // Nếu dữ liệu đã load, xử lý ngay; nếu chưa thì event sẽ xử lý khi load xong

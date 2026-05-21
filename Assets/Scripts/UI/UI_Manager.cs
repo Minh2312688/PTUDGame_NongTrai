@@ -5,6 +5,8 @@ using System.Security.Cryptography;
 using UnityEngine.UI;
 public class UI_Manager : MonoBehaviour
 {
+    public static UI_Manager Instance { get; private set; }
+    
     public Dictionary<string, Inventory_UI> inventoryUIByName = new Dictionary<string, Inventory_UI>();
 
     public GameObject inventoryPanel;
@@ -16,6 +18,15 @@ public class UI_Manager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        
         Initialize();
     }
 

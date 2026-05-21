@@ -7,8 +7,10 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TileMapManager:MonoBehaviour
+public class TileMapManager : MonoBehaviour
 {
+    public static TileMapManager Instance { get; private set; }
+    
     public Tilemap tm_Ground;
     public Tilemap tm_Grass;
     public Tilemap tm_Forest;
@@ -18,10 +20,22 @@ public class TileMapManager:MonoBehaviour
     FirebaseUser user;
     DatabaseReference reference;
     
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    
     void Start()
     {
         map=new Map();
-        databaseManager=GameObject.Find("DatabaseManager").GetComponent<FireBaseDatabaseManager>();
+        databaseManager = FireBaseDatabaseManager.Instance;
         user=FirebaseAuth.DefaultInstance.CurrentUser;
         FirebaseApp app=FirebaseApp.DefaultInstance;
         reference = FirebaseDatabase.DefaultInstance.RootReference;

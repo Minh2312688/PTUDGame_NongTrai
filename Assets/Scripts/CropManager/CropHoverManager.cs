@@ -28,7 +28,7 @@ public class CropHoverManager : MonoBehaviour
                     ? "💧 Watered"
                     : "❗ Needs Water";
 
-                CropTooltipUI.instance.Show(
+                CropTooltipUI.Instance.Show(
                     crop.gameObject.name.Replace("(Clone)", "") +
                     "\n" +
                     Mathf.RoundToInt(progress) + "%" +
@@ -42,6 +42,6 @@ public class CropHoverManager : MonoBehaviour
             }
         }
 
-        CropTooltipUI.instance.Hide();
+        CropTooltipUI.Instance.Hide();
     }
 }

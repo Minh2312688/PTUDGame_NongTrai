@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class LoadDataManager : MonoBehaviour
 {
+    public static LoadDataManager Instance { get; private set; }
+    
     public static FirebaseUser firebaseUser;
     public static User userInGame;
     public Text userName;
@@ -19,8 +21,17 @@ public class LoadDataManager : MonoBehaviour
     private DatabaseReference reference;
 
 
-    void Awake()
+    private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        
         userInGame = new User();
         IsUserLoaded = false;
     }

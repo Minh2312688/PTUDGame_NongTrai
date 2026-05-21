@@ -6,8 +6,10 @@ using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
 using Newtonsoft.Json;
-public class RecyclableInventoryManager : MonoBehaviour,IRecyclableScrollRectDataSource
+public class RecyclableInventoryManager : MonoBehaviour, IRecyclableScrollRectDataSource
 {
+    public static RecyclableInventoryManager Instance { get; private set; }
+    
         [SerializeField]
     RecyclableScrollRect _recyclableScrollRect;
     [SerializeField]
@@ -18,12 +20,21 @@ public class RecyclableInventoryManager : MonoBehaviour,IRecyclableScrollRectDat
     DatabaseReference reference;
     
     private void Awake()
-{
-    _recyclableScrollRect.DataSource = this;
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        
+        _recyclableScrollRect.DataSource = this;
 
-    user = FirebaseAuth.DefaultInstance.CurrentUser;
-    reference = FirebaseDatabase.DefaultInstance.RootReference;
-}
+        user = FirebaseAuth.DefaultInstance.CurrentUser;
+        reference = FirebaseDatabase.DefaultInstance.RootReference;
+    }
     public int GetItemCount()
     {
     return invenItems.lstInventItem.Count;

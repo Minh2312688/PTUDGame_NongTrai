@@ -2,8 +2,11 @@ using System;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+
 public class TileManager : MonoBehaviour
 {
+    public static TileManager Instance { get; private set; }
+    
     public Tilemap interactableMap;
     public Tile hiddenInteractableTile;
     public Tile plowedTile;
@@ -11,6 +14,19 @@ public class TileManager : MonoBehaviour
 
     [Header("Crops")]
     public GameObject wheatCropPrefab;
+    
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    
     void Start()
     {
         foreach(var pos in interactableMap.cellBounds.allPositionsWithin)
@@ -71,5 +87,4 @@ public class TileManager : MonoBehaviour
             position,
             hiddenInteractableTile);
     }
-
 }

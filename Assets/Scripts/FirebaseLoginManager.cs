@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class FirebaseLoginManager:MonoBehaviour
+public class FirebaseLoginManager : MonoBehaviour
 {
+    public static FirebaseLoginManager Instance { get; private set; }
+    
     //Đăng ký
     [Header("Register")]
     public InputField ipRegisterEmail;
@@ -28,6 +30,17 @@ public class FirebaseLoginManager:MonoBehaviour
     private FireBaseDatabaseManager databaseManager;
 
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     void Start()
     {
         auth = FirebaseAuth.DefaultInstance;
@@ -35,7 +48,7 @@ public class FirebaseLoginManager:MonoBehaviour
         btnLogin.onClick.AddListener(SigInWithFirebase);
         btnMoveToLogin.onClick.AddListener(SwitchForm);
         btnMoveToRegister.onClick.AddListener(SwitchForm);
-        databaseManager=GetComponent<FireBaseDatabaseManager>();
+        databaseManager = FireBaseDatabaseManager.Instance;
     }
     void RegisterAcountWithFirebase()
     {

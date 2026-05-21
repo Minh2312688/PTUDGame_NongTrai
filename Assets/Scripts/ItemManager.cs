@@ -3,12 +3,23 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
+    public static ItemManager Instance { get; private set; }
+    
     public Item[] items;
 
     private Dictionary<string, Item> nameToItemDict = new Dictionary<string, Item>();
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        
         foreach (Item item in items)
         {
             

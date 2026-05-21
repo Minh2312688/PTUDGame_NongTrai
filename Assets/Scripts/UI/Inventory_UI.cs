@@ -21,7 +21,7 @@ public class Inventory_UI : MonoBehaviour
 
     private void Start()
     {
-        inventory = GameManager.instance.player.inventoryManager.GetInventoryByName(inventoryName);
+        inventory = GameManager.Instance.player.inventoryManager.GetInventoryByName(inventoryName);
         SetupSlots();
         Refresh();
     }
@@ -47,19 +47,19 @@ public class Inventory_UI : MonoBehaviour
 
     public void Remove()
     {
-        Item itemToDrop = GameManager.instance.itemManager.GetItemByName(
+        Item itemToDrop = GameManager.Instance.itemManager.GetItemByName(
             inventory.slots[UI_Manager.draggedSlot.slotID].itemName);
 
         if (itemToDrop != null)
         {
             if (UI_Manager.dragSingle)
             {
-                GameManager.instance.player.DropItem(itemToDrop);
+                GameManager.Instance.player.DropItem(itemToDrop);
                 inventory.Remove(UI_Manager.draggedSlot.slotID);
             }
             else
             {
-                GameManager.instance.player.DropItem(itemToDrop, inventory.slots[UI_Manager.draggedSlot.slotID].count);
+                GameManager.Instance.player.DropItem(itemToDrop, inventory.slots[UI_Manager.draggedSlot.slotID].count);
                 inventory.Remove(UI_Manager.draggedSlot.slotID, inventory.slots[UI_Manager. draggedSlot.slotID].count);
             }
            
@@ -109,7 +109,7 @@ public class Inventory_UI : MonoBehaviour
                 UI_Manager.draggedSlot.inventory.slots[UI_Manager.draggedSlot.slotID].count);
         }
         
-        GameManager.instance.uiManager.RefreshAll();
+        GameManager.Instance.uiManager.RefreshAll();
     }
 
     private void MoveToMousePosition(GameObject toMove)

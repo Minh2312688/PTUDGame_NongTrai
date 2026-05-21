@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class DayAndNightManager : MonoBehaviour
 {
+    public static DayAndNightManager Instance { get; private set; }
+    
     public Text clockText;
 
     public float dayMultiplier = 20f;
@@ -21,10 +23,21 @@ public class DayAndNightManager : MonoBehaviour
 
     private int currentDay = 1;
     private int lastHour = 0;
+    private DateTime loadedTime = DateTime.Now;
+    private DateTime startTime = DateTime.Now;
 
-    void Awake()
+    private void Awake()
     {
-        databaseManager = GameObject.Find("DatabaseManager").GetComponent<FireBaseDatabaseManager>();
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        
+        databaseManager = FireBaseDatabaseManager.Instance;
         user = FirebaseAuth.DefaultInstance.CurrentUser;
 
         if (user == null)
@@ -43,9 +56,10 @@ public class DayAndNightManager : MonoBehaviour
 
     void Update()
     {
-        DateTime realtime = DateTime.Now;
-
-        float realSecondsInday = realtime.Hour * 3600 + realtime.Minute * 60 + realtime.Second;
+        // Tính thời gian đã trôi qua từ startTime
+        DateTime currentRealtime = DateTime.Now;
+        TimeSpan elapsedTime = currentRealtime - startTime;
+        float realSecondsInday = (float)elapsedTime.TotalSeconds;
         realSecondsInday = (realSecondsInday * dayMultiplier) % 86400;
 
         int gameHours = Mathf.FloorToInt(realSecondsInday / 3600);
@@ -72,6 +86,7 @@ public class DayAndNightManager : MonoBehaviour
     if (saveTimer >= 5f)
     {
         WriteTimeInGameToFirebase();
+        WriteDayNightToFirebase();
         saveTimer = 0f;
     }
     }
@@ -92,7 +107,24 @@ public class DayAndNightManager : MonoBehaviour
             DataSnapshot snapshot = task.Result;
             Debug.Log("snapshot: " + snapshot.Value.ToString());
             if (snapshot.Value != null)
-                clockText.text = snapshot.Value.ToString();
+            {
+                string timeString = snapshot.Value.ToString();
+                clockText.text = timeString;
+
+                // Parse thời gian từ Firebase (HH:MM)
+                string[] timeParts = timeString.Split(':');
+                if (timeParts.Length == 2 && int.TryParse(timeParts[0], out int hours) && int.TryParse(timeParts[1], out int minutes))
+                {
+                    // Tính số giây trong ngày từ thời gian load
+                    float savedSecondsInDay = hours * 3600 + minutes * 60;
+                    
+                    // Lưu base time (thời gian được load)
+                    loadedTime = DateTime.Now;
+                    startTime = DateTime.Now.AddSeconds(-savedSecondsInDay / dayMultiplier);
+
+                    Debug.Log("✅ Load time from Firebase: " + timeString + " -> Recalculate from: " + startTime);
+                }
+            }
         });
     }
 
@@ -105,8 +137,9 @@ public class DayAndNightManager : MonoBehaviour
     // 🕐 Lấy giờ hiện tại trong game (0-23)
     public int GetCurrentHour()
     {
-        DateTime realtime = DateTime.Now;
-        float realSecondsInday = realtime.Hour * 3600 + realtime.Minute * 60 + realtime.Second;
+        DateTime currentRealtime = DateTime.Now;
+        TimeSpan elapsedTime = currentRealtime - startTime;
+        float realSecondsInday = (float)elapsedTime.TotalSeconds;
         realSecondsInday = (realSecondsInday * dayMultiplier) % 86400;
         return Mathf.FloorToInt(realSecondsInday / 3600);
     }
@@ -120,16 +153,45 @@ public class DayAndNightManager : MonoBehaviour
     // 📅 Lấy ngày hiện tại trong game
     public int GetCurrentDay()
     {
-        DateTime realtime = DateTime.Now;
-
-        float realSecondsInday =
-            realtime.Hour * 3600 +
-            realtime.Minute * 60 +
-            realtime.Second;
+        DateTime currentRealtime = DateTime.Now;
+        TimeSpan elapsedTime = currentRealtime - startTime;
+        float realSecondsInday = (float)elapsedTime.TotalSeconds;
 
         float totalGameDays =
             (realSecondsInday * dayMultiplier) / 86400f;
 
-        return Mathf.FloorToInt(totalGameDays);
+        return Mathf.FloorToInt(totalGameDays) + 1;
+    }
+
+    // 🌞/🌙 Kiểm tra hiện tại là ngày hay đêm
+    public bool IsDay()
+    {
+        int currentHour = GetCurrentHour();
+        return currentHour >= 6 && currentHour < 18;
+    }
+
+    // 🌙 Kiểm tra hiện tại là đêm
+    public bool IsNight()
+    {
+        return !IsDay();
+    }
+
+    // 📝 Lấy trạng thái ngày/đêm dạng string
+    public string GetDayNightStatus()
+    {
+        if (IsDay())
+            return "Day";
+        else
+            return "Night";
+    }
+
+    // 📤 Lưu ngày/đêm lên Firebase
+    public void WriteDayNightToFirebase()
+    {
+        if (user != null)
+        {
+            string dayNightData = GetCurrentDay() + "_" + GetDayNightStatus();
+            databaseManager.WriteDatabase("DayNight/" + user.UserId, dayNightData);
+        }
     }
 }

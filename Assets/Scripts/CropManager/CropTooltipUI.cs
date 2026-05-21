@@ -2,14 +2,21 @@ using UnityEngine;
 using TMPro;
 public class CropTooltipUI : MonoBehaviour
 {
-    public static CropTooltipUI instance;
+    public static CropTooltipUI Instance { get; private set; }
 
     public GameObject panel;
     public TextMeshProUGUI infoText;
 
     private void Awake()
     {
-        instance = this;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
         Hide();
     }
 

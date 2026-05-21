@@ -21,14 +21,14 @@ public class EggPickup : MonoBehaviour
     {
         isMouseOver = true;
 
-        CursorManager.instance.SetBao();
+        CursorManager.Instance.SetBao();
     }
 
     private void OnMouseExit()
     {
         isMouseOver = false;
 
-        CursorManager.instance.ResetCursor();
+        CursorManager.Instance.ResetCursor();
     }
 
     private void Update()
@@ -43,7 +43,7 @@ public class EggPickup : MonoBehaviour
     IEnumerator PickupEgg()
     {
         // Tay nắm
-        CursorManager.instance.SetBua();
+        CursorManager.Instance.SetBua();
 
         yield return new WaitForSeconds(0.1f);
 
@@ -51,7 +51,7 @@ public class EggPickup : MonoBehaviour
         inventoryManager.Add("Backpack", item);
 
         // Reset chuột
-        CursorManager.instance.ResetCursor();
+        CursorManager.Instance.ResetCursor();
 
         // Xóa item
         Destroy(gameObject);

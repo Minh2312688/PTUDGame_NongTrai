@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-   public static AudioManager Instance;
+    public static AudioManager Instance { get; private set; }
 
     [Header("Audio Sources")]
     public AudioSource musicSource;
@@ -47,18 +47,17 @@ public class AudioManager : MonoBehaviour
     {
         PlayMusic(farmMusic);
     }
-    void Awake()
+
+    private void Awake()
     {
-        // Singleton
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // không bị mất khi load scene
-        }
-        else
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     void Update()
     {

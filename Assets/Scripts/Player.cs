@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        tileManager = GameManager.instance.tileManager;
+        tileManager = GameManager.Instance.tileManager;
     }
 
     private void Update()
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
 
                             inventoryManager.toolbar.selectedSlot.RemoveItem();
 
-                            GameManager.instance.uiManager.RefreshAll();
+                            GameManager.Instance.uiManager.RefreshAll();
                         }
                     }
 
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 
                     else if (inventoryManager.toolbar.selectedSlot.itemName == "Watering Can")
                     {
-                        Crop[] crops = FindObjectsByType<Crop>(FindObjectsSortMode.None);
+                        Crop[] crops = FindObjectsByType<Crop>();
 
                         foreach (Crop crop in crops)
                         {
@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
 
                         if (hit != null)
                         {
-                            Crop[] crops = FindObjectsByType<Crop>(FindObjectsSortMode.None);
+                            Crop[] crops = FindObjectsByType<Crop>();
 
                             foreach (Crop crop in crops)
                             {

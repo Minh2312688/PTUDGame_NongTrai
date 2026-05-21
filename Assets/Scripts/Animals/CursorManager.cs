@@ -3,15 +3,22 @@ using System.Collections;
 
 public class CursorManager : MonoBehaviour
 {
-    public static CursorManager instance;
-
+    public static CursorManager Instance { get; private set; }
+    
     public Texture2D baoCursor;
 
     public Texture2D buaCursor;
 
-    void Awake()
+    private void Awake()
     {
-        instance = this;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Tay mở

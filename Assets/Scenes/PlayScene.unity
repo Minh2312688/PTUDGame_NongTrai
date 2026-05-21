@@ -38634,7 +38634,7 @@ MonoBehaviour:
   sun: {fileID: -198587242222287588, guid: 26a7c9f54435d6f4396b7fe1022c6ee9, type: 3}
   rain: {fileID: -1458130595995073401, guid: d45bad9e7d564914da791d8bc0d16424, type: 3}
   moon: {fileID: 9083969447635318612, guid: 9e8dff3fbd9a34548bf6be8eda366575, type: 3}
-  isRaining: 0
+  overcast: {fileID: 8287873616420496286, guid: ecf2ee6fa0d51754894ec73358ad4b69, type: 3}
 --- !u!4 &412166413
 Transform:
   m_ObjectHideFlags: 0
@@ -58200,9 +58200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81497db67136dbf439850c6f3c2c7f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RecyclableInventoryManager
-  _recyclableScrollRect: {fileID: 0}
+  _recyclableScrollRect: {fileID: 545526497}
   _dataLength: 10
-  inventoryGameObject: {fileID: 0}
+  inventoryGameObject: {fileID: 1399422487}
 --- !u!4 &1709495311
 Transform:
   m_ObjectHideFlags: 0

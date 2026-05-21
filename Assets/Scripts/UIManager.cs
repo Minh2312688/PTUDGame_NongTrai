@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
+    
     public GameObject panel;
     public Image imgDiamond;
     public Text txtDiamond;
@@ -16,7 +18,20 @@ public class UIManager : MonoBehaviour
     public Sprite iconView;
     public Sprite iconHide;
     private bool isHidden = false;
-     void Start()
+    
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    
+    void Start()
     {
         btnHide.onClick.AddListener(HideUI);
         btnLogout.onClick.AddListener(FirebaseLoginManager.SignOut);

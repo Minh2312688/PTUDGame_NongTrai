@@ -26,7 +26,7 @@ public class PlayerFarmController : MonoBehaviour
     }
     void Start()
     {
-        recyclableInventoryManager = GameObject.Find("InventoryManager").GetComponent<RecyclableInventoryManager>();
+        recyclableInventoryManager = RecyclableInventoryManager.Instance;
     }
     public void HandleFarmAction()
     {

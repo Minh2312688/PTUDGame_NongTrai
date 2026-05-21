@@ -5,13 +5,24 @@ using UnityEngine;
 
 public class FireBaseDatabaseManager : MonoBehaviour
 {
-    DatabaseReference reference;
+    public static FireBaseDatabaseManager Instance { get; private set; }
+    
+    private DatabaseReference reference;
+    
     // Chạy trước khi game được khởi tạo (trước frae ảnh dầu tiên xuất hiện)
-    void Awake()
+    private void Awake()
     {
-        FirebaseApp app=FirebaseApp.DefaultInstance;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        
+        FirebaseApp app = FirebaseApp.DefaultInstance;
         reference = FirebaseDatabase.DefaultInstance.RootReference;
-
     }
     void Start()
     {

@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // Chỉ cho click move khi inventory đóng
-            if (!GameManager.instance.uiManager.inventoryPanel.activeSelf)
+            if (!GameManager.Instance.uiManager.inventoryPanel.activeSelf)
             {
                 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 isMovingByMouse = true;

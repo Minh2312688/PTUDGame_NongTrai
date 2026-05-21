@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance { get; private set; }
 
     public ItemManager itemManager;
     public TileManager tileManager;
@@ -12,16 +12,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (Instance != null && Instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+            return;
         }
-        else
-        {
-            instance = this;
-        }
-
-        DontDestroyOnLoad(this.gameObject);
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
 
         itemManager = GetComponent<ItemManager>();
         tileManager = GetComponent<TileManager>();
