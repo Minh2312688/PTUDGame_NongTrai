@@ -329,8 +329,8 @@ TextureImporter:
       name: tileset_5
       rect:
         serializedVersion: 2
-        x: 205
-        y: 127
+        x: 206
+        y: 128
         width: 102
         height: 68
       alignment: 0
