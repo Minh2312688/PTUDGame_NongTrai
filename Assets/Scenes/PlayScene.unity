@@ -70268,7 +70268,6 @@ GameObject:
   - component: {fileID: 6150500849108355518}
   - component: {fileID: 3346878110299739393}
   - component: {fileID: 6150500849108355519}
-  - component: {fileID: 6150500849108355521}
   - component: {fileID: 6150500849108355520}
   m_Layer: 5
   m_Name: ProductSelectionPanel
@@ -78774,6 +78773,7 @@ GameObject:
   - component: {fileID: 6697457095220110577}
   - component: {fileID: 8179075565411439521}
   - component: {fileID: 1693012616216601840}
+  - component: {fileID: 8179075565411439522}
   m_Layer: 5
   m_Name: AdjustmentPanel
   m_TagString: Untagged
@@ -80685,7 +80685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProductSelectionUI
   itemSlotPrefab: {fileID: 8956182242169864134, guid: c42c233260b09b047928b3f7cc064d79, type: 3}
   scrollContent: {fileID: 1358842066795355978}
-  adjustmentCanvasGroup: {fileID: 6150500849108355521}
+  adjustmentCanvasGroup: {fileID: 8179075565411439522}
   btnMinusAmount: {fileID: 7172373456423567659}
   btnPlusAmount: {fileID: 233159016799367369}
   txtAmountDisplay: {fileID: 8060110120985345725}
@@ -80694,18 +80694,6 @@ MonoBehaviour:
   txtPriceDisplay: {fileID: 2393531910992500280}
   txtTotalGoldDisplay: {fileID: 1860460242200899429}
   btnConfirmSell: {fileID: 955042884348044015}
---- !u!225 &6150500849108355521
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2514638172009149804}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!224 &6183481802040998048
 RectTransform:
   m_ObjectHideFlags: 0
@@ -86367,6 +86355,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5465707845561048744}
   m_CullTransparentMesh: 1
+--- !u!225 &8179075565411439522
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465707845561048744}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &8185604083854936382
 MonoBehaviour:
   m_ObjectHideFlags: 0
