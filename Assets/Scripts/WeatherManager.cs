@@ -87,6 +87,36 @@ public class WeatherManager : MonoBehaviour
             WriteWeatherToFirebase();
             saveTimer = 0f;
         }
+
+        // 🎮 Phím tắt để test thời tiết nhanh
+        HandleQuickWeatherSwitching();
+    }
+
+    // Xử lý chuyển đổi nhanh thời tiết bằng phím tắt
+    void HandleQuickWeatherSwitching()
+    {
+        #if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ForceSunny();
+            Debug.Log("✅ [TEST] Chuyển sang thời tiết NẮNG");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ForceRain();
+            Debug.Log("✅ [TEST] Chuyển sang thời tiết MƯA");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ForceOvercast();
+            Debug.Log("✅ [TEST] Chuyển sang thời tiết ÂM U");
+        }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            RandomWeather();
+            Debug.Log("✅ [TEST] Thời tiết NGẪU NHIÊN");
+        }
+        #endif
     }
 
     // random thời tiết
