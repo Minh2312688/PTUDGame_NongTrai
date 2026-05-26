@@ -2,21 +2,62 @@ using UnityEngine;
 
 public class FeedZone : MonoBehaviour
 {
-    // Động vật
     public Animal animal;
 
     private bool playerNear = false;
 
+    private InventoryManager inventoryManager;
+
+    private void Start()
+    {
+        inventoryManager =
+            FindObjectOfType<InventoryManager>();
+    }
+
     void Update()
     {
-        // Đứng gần + bấm E
+        // đứng gần + nhấn SPACE
         if(playerNear &&
-            Input.GetKeyDown(KeyCode.E))
+            Input.GetKeyDown(KeyCode.Space))
         {
-            animal.isFed = true;
-
-            Debug.Log("Animal Fed");
+            FeedAnimal();
         }
+    }
+
+    void FeedAnimal()
+    {
+        Inventory toolbar =
+            inventoryManager.GetInventoryByName(
+                "Toolbar");
+
+        if(toolbar == null)
+            return;
+
+        // tìm thức ăn
+        for(int i = 0;
+            i < toolbar.slots.Count;
+            i++)
+        {
+            Inventory.Slot slot =
+                toolbar.slots[i];
+
+            // item tên Food
+            if(slot.itemName == "Food" &&
+                slot.count > 0)
+            {
+                // trừ thức ăn
+                toolbar.Remove(i);
+
+                // cho ăn
+                animal.isFed = true;
+
+                Debug.Log("Animal Fed");
+
+                return;
+            }
+        }
+
+        Debug.Log("No Food");
     }
 
     private void OnTriggerEnter2D(
@@ -26,7 +67,8 @@ public class FeedZone : MonoBehaviour
         {
             playerNear = true;
 
-            Debug.Log("Player Near Feed Zone");
+            Debug.Log(
+                "Player Near Feed Zone");
         }
     }
 
@@ -36,8 +78,6 @@ public class FeedZone : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             playerNear = false;
-
-            Debug.Log("Player Left Feed Zone");
         }
     }
 }
