@@ -79,7 +79,7 @@ public class FirebaseLoginManager : MonoBehaviour
 
             databaseManager.WriteDatabase("User/" + newUser.UserId, userInGame.ToString());
             //Chuyển màn chơi sau khi đăng nhập thành công
-            SceneManager.LoadScene("PlayScene");
+            SceneManager.LoadScene("PlaySceneFix 1");
         });
     }
     public void SigInWithFirebase()
@@ -107,7 +107,7 @@ public class FirebaseLoginManager : MonoBehaviour
                 user.DisplayName, user.UserId);
             
             //Chuyển màn chơi sau khi đăng nhập thành công
-            SceneManager.LoadScene("PlayScene");
+            SceneManager.LoadScene("PlaySceneFix 1");
         });
     }
     public static void SignOut()

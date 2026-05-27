@@ -71,11 +71,10 @@ public class WeatherManager : MonoBehaviour
         // Load thời tiết từ Firebase
         LoadWeatherForUser();
 
-        // bắt đầu trời nắng
-        SetSunny();
+        
 
         // tự đổi thời tiết
-        InvokeRepeating(nameof(RandomWeather), 5f, weatherChangeTime);
+        InvokeRepeating(nameof(RandomWeather), weatherChangeTime, weatherChangeTime);
     }
 
     void Update()
@@ -127,7 +126,7 @@ public class WeatherManager : MonoBehaviour
         if (weatherChance > 0.65f)
         {
             SetSunny();
-            //SetRain();
+
         }
         else if (weatherChance > 0.35f)
         {
@@ -135,8 +134,8 @@ public class WeatherManager : MonoBehaviour
         }
         else
         {
-            SetSunny();
-            //SetRain();
+            SetRain();
+            
         }
 
         // Ghi thay đổi lên Firebase
@@ -259,6 +258,9 @@ public class WeatherManager : MonoBehaviour
                     SetOvercast();
                 else
                     SetSunny();
+            }
+            else{
+                SetSunny();
             }
         });
     }

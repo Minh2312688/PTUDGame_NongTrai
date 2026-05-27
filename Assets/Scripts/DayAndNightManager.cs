@@ -25,7 +25,7 @@ public class DayAndNightManager : MonoBehaviour
     private int lastHour = 0;
     private DateTime loadedTime = DateTime.Now;
     private DateTime startTime = DateTime.Now;
-
+    private bool isTimeLoaded = false;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -56,6 +56,7 @@ public class DayAndNightManager : MonoBehaviour
 
     void Update()
     {
+        if (!isTimeLoaded) return;
         // Tính thời gian đã trôi qua từ startTime
         DateTime currentRealtime = DateTime.Now;
         TimeSpan elapsedTime = currentRealtime - startTime;
@@ -99,33 +100,111 @@ public class DayAndNightManager : MonoBehaviour
 
     public void LoadTimeInGameForUser()
     {
-        reference.Child("TimeInGame").Child(user.UserId)
+        reference.Child("Users").Child("TimeInGame").Child(user.UserId)
         .GetValueAsync().ContinueWithOnMainThread(task =>
         {
-            if (task.IsCanceled || task.IsFaulted) return;
-
-            DataSnapshot snapshot = task.Result;
-            Debug.Log("snapshot: " + snapshot.Value.ToString());
-            if (snapshot.Value != null)
+            try
             {
-                string timeString = snapshot.Value.ToString();
-                clockText.text = timeString;
-
-                // Parse thời gian từ Firebase (HH:MM)
-                string[] timeParts = timeString.Split(':');
-                if (timeParts.Length == 2 && int.TryParse(timeParts[0], out int hours) && int.TryParse(timeParts[1], out int minutes))
+                if (task.IsCanceled || task.IsFaulted)
                 {
-                    // Tính số giây trong ngày từ thời gian load
-                    float savedSecondsInDay = hours * 3600 + minutes * 60;
-                    
-                    // Lưu base time (thời gian được load)
-                    loadedTime = DateTime.Now;
-                    startTime = DateTime.Now.AddSeconds(-savedSecondsInDay / dayMultiplier);
+                    Debug.LogError("❌ Lỗi load thời gian từ Firebase: " + task.Exception);
+                    InitializeDefaultTime();
+                    return;
+                }
 
-                    Debug.Log("✅ Load time from Firebase: " + timeString + " -> Recalculate from: " + startTime);
+                DataSnapshot snapshot = task.Result;
+                Debug.Log("📊 Checking path: Users/TimeInGame/" + user.UserId);
+                Debug.Log("snapshot.Exists: " + snapshot.Exists);
+                Debug.Log("snapshot.Value: " + (snapshot.Value ?? "NULL"));
+                
+                // Nếu không tìm thấy ở "TimeInGame/{userId}", thử path khác
+                if (!snapshot.Exists)
+                {
+                    Debug.LogWarning("⚠️ Không tìm thấy dữ liệu ở Users/TimeInGame/" + user.UserId);
+                    Debug.LogWarning("🔍 Thử kiểm tra cấu trúc database...");
+                    
+                    // Thử lấy toàn bộ Users/TimeInGame để debug
+                    reference.Child("Users").Child("TimeInGame").GetValueAsync().ContinueWithOnMainThread(debugTask =>
+                    {
+                        if (!debugTask.IsFaulted)
+                        {
+                            DataSnapshot debugSnapshot = debugTask.Result;
+                            if (debugSnapshot.Exists)
+                            {
+                                Debug.Log("📋 Dữ liệu trong Users/TimeInGame:");
+                                foreach (DataSnapshot child in debugSnapshot.Children)
+                                {
+                                    Debug.Log("  - " + child.Key + ": " + child.Value);
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log("Users/TimeInGame không tồn tại");
+                            }
+                        }
+                    });
+                    
+                    InitializeDefaultTime();
+                    return;
+                }
+
+                // Nếu tồn tại, tiến hành parse
+                if (snapshot.Value != null)
+                {
+                    string timeString = snapshot.Value.ToString();
+                    Debug.Log("📥 Raw data from Firebase: '" + timeString + "'");
+
+                    // Kiểm tra clockText trước khi assign
+                    if (clockText == null)
+                    {
+                        Debug.LogError("❌ clockText chưa được assign!");
+                        InitializeDefaultTime();
+                        return;
+                    }
+
+                    clockText.text = timeString;
+
+                    // Parse thời gian từ Firebase (HH:MM)
+                    string[] timeParts = timeString.Split(':');
+                    if (timeParts.Length == 2 && int.TryParse(timeParts[0], out int hours) && int.TryParse(timeParts[1], out int minutes))
+                    {
+                        // Tính số giây trong ngày từ thời gian load
+                        float savedSecondsInDay = hours * 3600 + minutes * 60;
+                        
+                        // Lưu base time (thời gian được load)
+                        loadedTime = DateTime.Now;
+                        startTime = DateTime.Now.AddSeconds(-savedSecondsInDay / dayMultiplier);
+
+                        Debug.Log("✅ Load time from Firebase: " + timeString + " -> Recalculate from: " + startTime);
+                        isTimeLoaded = true;
+                    }
+                    else
+                    {
+                        Debug.LogError("❌ Không thể parse thời gian: '" + timeString + "'. Expected format: HH:MM");
+                        InitializeDefaultTime();
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("⚠️ snapshot.Value = NULL");
+                    InitializeDefaultTime();
                 }
             }
+            catch (Exception ex)
+            {
+                Debug.LogError("❌ Exception trong LoadTimeInGameForUser: " + ex.Message + "\n" + ex.StackTrace);
+                InitializeDefaultTime();
+            }
         });
+    }
+
+    private void InitializeDefaultTime()
+    {
+        loadedTime = DateTime.Now;
+        startTime = DateTime.Now;
+        clockText.text = "00:00";
+        isTimeLoaded = true;
+        Debug.Log("✅ Khởi tạo thời gian mặc định: 00:00");
     }
 
     public void WriteTimeInGameToFirebase()
