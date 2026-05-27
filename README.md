@@ -12,7 +12,7 @@
 *(Giao diện xác thực người dùng qua Firebase Auth)*
 
 ### 2. Trồng trọt & Thu hoạch
-![Gameplay](Screenshots/gameplay.png)  
+![Gameplay](Screenshots/gameplay.jpg)  
 *(Hệ thống Tilemap tương tác: cuốc đất, gieo hạt, tưới nước)*
 
 ### 3. Hệ thống Cửa hàng & Sạp hàng
