@@ -11,10 +11,17 @@ public class Chicken : MonoBehaviour
     // Vị trí ban đầu
     private Vector3 startPosition;
 
+    // Script ăn
+    private ChickenEat chickenEat;
+
     void Start()
     {
         // Lưu vị trí gốc
         startPosition = transform.position;
+
+        // Lấy script ChickenEat
+        chickenEat =
+            GetComponent<ChickenEat>();
 
         // Chọn điểm random đầu tiên
         SetNewTarget();
@@ -22,6 +29,13 @@ public class Chicken : MonoBehaviour
 
     void Update()
     {
+        // Nếu đang ăn thì đứng yên
+        if(chickenEat != null &&
+            chickenEat.IsEating())
+        {
+            return;
+        }
+
         // Di chuyển tới điểm target
         transform.position = Vector3.MoveTowards(
             transform.position,

@@ -126,7 +126,8 @@ public class WeatherManager : MonoBehaviour
         
         if (weatherChance > 0.65f)
         {
-            SetRain();
+            SetSunny();
+            //SetRain();
         }
         else if (weatherChance > 0.35f)
         {
@@ -135,6 +136,7 @@ public class WeatherManager : MonoBehaviour
         else
         {
             SetSunny();
+            //SetRain();
         }
 
         // Ghi thay đổi lên Firebase
