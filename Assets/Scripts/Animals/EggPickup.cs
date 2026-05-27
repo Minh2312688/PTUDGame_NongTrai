@@ -11,8 +11,8 @@ public class EggPickup : MonoBehaviour
 
     private void Start()
     {
-        inventoryManager =
-            FindObjectOfType<InventoryManager>();
+        inventoryManager = 
+        FindFirstObjectByType<InventoryManager>();
 
         item = GetComponent<Item>();
     }

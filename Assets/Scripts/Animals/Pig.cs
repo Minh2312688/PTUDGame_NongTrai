@@ -22,6 +22,30 @@ public class Pig : MonoBehaviour
 
     void Update()
     {
+        // Kiểm tra IsEating từ bất kỳ loài nào (Pig, Cow, Sheep)
+        bool isEating = false;
+        
+        // Kiểm tra PigEat
+        PigEat pigEat = GetComponent<PigEat>();
+        if (pigEat != null && pigEat.IsEating())
+            isEating = true;
+        
+        // Kiểm tra CowEat
+        CowEat cowEat = GetComponent<CowEat>();
+        if (cowEat != null && cowEat.IsEating())
+            isEating = true;
+        
+        // Kiểm tra SheepEat
+        SheepEat sheepEat = GetComponent<SheepEat>();
+        if (sheepEat != null && sheepEat.IsEating())
+            isEating = true;
+        
+        // Nếu đang ăn thì đứng yên
+        if (isEating)
+        {
+            return;
+        }
+        
         // Di chuyển tới điểm target
         transform.position = Vector3.MoveTowards(
             transform.position,
